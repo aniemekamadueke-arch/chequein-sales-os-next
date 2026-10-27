@@ -2,6 +2,10 @@
 
 A production-shaped rebuild of the ChequeIn sales system: a free-payroll pipeline that is gated by compliance, activated by staff sessions, and measured in naira per employee.
 
+**Live:** https://aniemekamadueke-arch.github.io/chequein-sales-os-next/
+**Repo:** https://github.com/aniemekamadueke-arch/chequein-sales-os-next
+**v1 static build:** https://aniemekamadueke-arch.github.io/chequein-sales-os/
+
 ## Stack
 
 - **Next.js 16** App Router + **React 19** + **TypeScript**
@@ -64,7 +68,7 @@ The domain logic is in `src/lib/domain.ts`, independent of the UI, so it can be 
 
 This build is **local-first**: the store persists to `localStorage`, keyed by origin. Each visitor gets their own workspace; export/import in **Settings & data** moves a snapshot between people.
 
-A shared team pipeline needs a server or hosted database. The earlier Netlify function in the sibling project (`../chequein-sales-os/netlify/functions/state.mjs`) is a working version-checked sync API, but it cannot be used from a static GitHub Pages export. To make this app multi-user, replace the Zustand persistence layer with calls to a Next route handler + Postgres/SQLite, or host this project on a Node runtime (Vercel, Netlify, Fly) and add the API there.
+A shared team pipeline needs a server or hosted database. The v1 project included a working version-checked sync API with Netlify Blobs; that pattern can be ported to Next route handlers when this app moves to a Node host (Vercel, Netlify, Fly). To make it multi-user on GitHub Pages alone is not possible — Pages is static. Replace the Zustand persistence layer with a Next route handler + Postgres/SQLite behind a real host.
 
 ## Notes
 
